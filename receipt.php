@@ -16,17 +16,17 @@
 
         $arr = array(0 => $apple, 1 => $orange, 2 => $banana);
 
-		$total = int($apple) * 69 +int($orange) *59 + int($banana) * 39;
+		$total = ($apple * 69 +$orange *59 + $banana * 39)/100;
 
 		$filename = '/home/nikhil/Documents/Web Projects/Simple-WebApp/order.txt';
 		$file = fopen($filename, 'rw');
 		$i = 0;
 		$line1 = fgets($file);
-		$cur_apple = int( substr($line1, strlen($line1)-3, 2) );
+		$cur_apple = substr($line1, strlen($line1)-3, 2);
 		$line2 = fgets($file);
-		$cur_orange = int( substr($line2, strlen($line2)-3, 2) );
+		$cur_orange = substr($line2, strlen($line2)-3, 2);
 		$line3 = fgets($file);
-		$cur_banana = int( substr($line3, strlen($line3)-3, 2) );
+		$cur_banana = substr($line3, strlen($line3)-3, 2);
 
 		$next_apple = $cur_apple + $apple;
 		$next_orange = $cur_orange + $orange;
@@ -54,17 +54,17 @@
 		<tr>
 			<th>Apples</th>
 			<td><?php print ("$apple"); ?></td>
-			<td><?php print ("$apple * 69.0)/100.0"); ?></td>
+			<td><?php print (($apple * 69.0)/100.0); ?></td>
 		</tr>
 		<tr>
 			<th>Oranges</th>
 			<td><?php print ("$orange"); ?></td>
-			<td><?php print ($orange * 69.0)/100.0); ?></td>
+			<td><?php print (($orange * 69.0)/100.0); ?></td>
 		</tr>
 		<tr>
 			<th>Bananas</th>
 			<td><?php print ("$banana"); ?></td>
-			<td><?php print ($banana * 69.0)/100.0); ?></td>
+			<td><?php print (($banana * 69.0)/100.0); ?></td>
 		</tr>
 		<tr>
 			<th colspan=2>Total</th>
