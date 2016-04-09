@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns="">
+
+<head>
+	<title>CZ3006 Shop</title>
+</head>
+
+<body>
+	<script type="text/javascript">
+		function applesValidate(){
+			apple = document.getElementById("apples");
+			for (i=0;i<apple.value.length;i++){
+				if(apple.value[i].match(/[0-9]/i) == null){
+					apple.focus();
+					apple.select();
+					alert("INVALID INPUT!");
+					return false;
+				}
+			}
+			return true;
+		}
+		function orangesValidate(){
+			orange = document.getElementById("oranges");
+			for (i=0;i<orange.value.length;i++){
+				if(orange.value[i].match(/[0-9]/i) == null){
+					alert("INVALID INPUT!");
+					return false;
+				}
+			}
+			return true;
+		}
+		function bananasValidate(){
+			banana = document.getElementById("bananas");
+			for (i=0;i<banana.value.length;i++){
+				if(banana.value[i].match(/[0-9]/i) == null){
+					alert("INVALID INPUT!");
+					return false;
+				}
+			}
+			return true;
+		}
+		function setTotal(){
+			apple = document.getElementById("apples");
+			orange = document.getElementById("oranges");
+			banana = document.getElementById("bananas");
+			apple_value = apple.value;
+			orange_value = orange.value;
+			banana_value = banana.value;
+			
+
+			if (apple.value == '') apple_value = '0';
+			if (orange.value == '') orange_value = '0';
+			if (banana.value == '') banana_value = '0';
+
+			total = document.getElementById("total");
+			var tot = (parseFloat(apple_value) * 69.0 + parseFloat(orange_value) * 59.0 + parseFloat(banana_value) * 39.0)/100.0;
+			total.value = "$ " + parseFloat(tot);
+		}
+		function checkForm(){
+			name = document.getElementById("name");
+			if (name.value === ""){
+				alert("Please enter your name.");
+				return false;
+			}
+			return true;
+		}
+	</script>
+
+	<form name="MainForm" action="./index.php" onsubmit="return checkForm();">
+		<p>Name:
+		<input type="textbox" name="name" id="name" placeholder="eg: Mark Zuckerberg">
+		</input>
+		</p>
+		<p>Apples (69 cents/apple):
+		<input type="textbox" name="apples" id="apples" placeholder="eg: 2" onchange="applesValidate(); setTotal();">
+		</input>
+		</p>
+		<p>Oranges (59 cents/orange):
+		<input type="textbox" name="oranges" id="oranges" placeholder="eg: 2" onchange="orangesValidate(); setTotal();">
+		</input>
+		</p>		
+		<p>Bananas (39 cents/banana):
+		<input type="textbox" name="bananas" id="bananas" placeholder="eg: 2" onchange="bananasValidate(); setTotal();">
+		</input>
+		</p>
+		<p>Total cost:
+		<input type="textbox" name="total" id="total" placeholder="0" onfocus="blurfield();">
+		</input>
+		</p>
+		<p>Payment Methods:
+			<p>
+				<input type="radio" name="pmt" id="pmt" value="Visa"/>
+				Visa
+			</p>
+			<p>
+				<input type="radio" name="pmt" id="pmt" value="MasterCard"/>
+				MasterCard
+			</p>
+			<p>
+				<input type="radio" name="pmt" id="pmt" value="Discover"/>
+				Discover
+			</p>
+		</p>
+		<input type="submit" value="Submit">
+		</input>
+		<input type="reset">
+		</input>
+	</form>
+
+	<script type="text/javascript">
+		function blurfield(){
+			var tot = document.getElementById("total");
+			console.log("IN BLURFIELD");
+			tot.blur();
+		}
+	</script>
+</body>
+</html>
