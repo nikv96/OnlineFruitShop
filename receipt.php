@@ -9,6 +9,7 @@
 		$apple = $_POST["apples"];
 		$orange = $_POST["oranges"];
 		$banana = $_POST["bananas"];
+		$pmt = $_POST["pmt"];
 
 		if ($apple == "") $apple = 0;
         if ($orange == "") $orange = 0;
@@ -18,23 +19,35 @@
 
 		$total = ($apple * 69 +$orange *59 + $banana * 39)/100;
 
-		$filename = '/home/nikhil/Documents/Web Projects/Simple-WebApp/order.txt';
-		$file = fopen($filename, 'rw');
-		$i = 0;
-		$line1 = fgets($file);
-		$cur_apple = substr($line1, strlen($line1)-3, 2);
-		$line2 = fgets($file);
-		$cur_orange = substr($line2, strlen($line2)-3, 2);
-		$line3 = fgets($file);
-		$cur_banana = substr($line3, strlen($line3)-3, 2);
+		$filename = '/home/nikhil/Documents/order.txt';
+		$file = fopen($filename, 'c+');
 
+		$file_contents = file_get_contents($filename);
+
+		$cur_apple=0;
+		$cur_orange=0;
+		$cur_banana=0;
+
+		if ($file_contents !== ""){
+			preg_match("/Total number of apples: (\d+)/", $file_contents, $cur_apple);
+			preg_match("/Total number of oranges: (\d+)/", $file_contents, $cur_orange);
+			preg_match("/Total number of bananas: (\d+)/", $file_contents, $cur_banana);
+
+			$cur_apple = intval($cur_apple[1]);
+			$cur_orange = intval($cur_orange[1]);
+			$cur_banana = intval($cur_banana[1]);
+		}
+		
+
+
+		fseek($file,0);
 		$next_apple = $cur_apple + $apple;
 		$next_orange = $cur_orange + $orange;
 		$next_banana = $cur_banana + $banana;
 
-		$str = "Total number of apples: $next_apple \n
-		Total number of oranges: $next_orange\n
-		Total number of bananas: $next_banana";
+		$str = "Total number of apples: $next_apple\n";
+		$str .= "Total number of oranges: $next_orange\n";
+		$str .= "Total number of bananas: $next_banana";
 
 		fwrite($file, $str);
 
@@ -42,10 +55,12 @@
 	?>
 
 	<table>
-		<caption>Receipt for 
+		<caption><b>Receipt for 
 			<?php
 			print $name;
-			?>
+			?>Paid using 
+			<?php print $pmt; ?>
+			</b>
 		</caption>
 		<tr>
 			<th>Quantity</th>

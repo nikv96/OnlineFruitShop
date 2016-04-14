@@ -11,8 +11,6 @@
 			apple = document.getElementById("apples");
 			for (i=0;i<apple.value.length;i++){
 				if(apple.value[i].match(/[0-9]/i) == null){
-					apple.focus();
-					apple.select();
 					alert("INVALID INPUT!");
 					return false;
 				}
@@ -56,7 +54,7 @@
 			var tot = (parseFloat(apple_value) * 69.0 + parseFloat(orange_value) * 59.0 + parseFloat(banana_value) * 39.0)/100.0;
 			total.value = "$ " + parseFloat(tot);
 		}
-		function checkForm(){
+		function nameValidate(){
 			name = document.getElementById("name");
 			if (name.value === ""){
 				alert("Please enter your name.");
@@ -64,9 +62,20 @@
 			}
 			return true;
 		}
+		function paymentValidate(){
+			pmt = document.getElementById("pmt");
+			if (pmt.value === ""){
+				alert("Please choose your payment method.");
+				return false;
+			}
+			return true;
+		}
+		function checkForm(){
+			return nameValidate() && paymentValidate() && applesValidate() && orangesValidate() && bananasValidate();
+		}
 	</script>
 
-	<form name="MainForm" method="post" action="./index.php" onsubmit="return checkForm();">
+	<form name="MainForm" method="post" action="/receipt.php" onsubmit="return checkForm();">
 		<p>Name:
 		<input type="textbox" name="name" id="name" placeholder="eg: Mark Zuckerberg">
 		</input>
@@ -110,7 +119,6 @@
 	<script type="text/javascript">
 		function blurfield(){
 			var tot = document.getElementById("total");
-			console.log("IN BLURFIELD");
 			tot.blur();
 		}
 	</script>
