@@ -2,158 +2,201 @@
 <html xmlns="">
 
 <head>
-	<title>CZ3006 Online Fruit Shop</title>
+    <title>CZ3006 Online Fruit Shop</title>
 </head>
 
 <body>
-	<script type="text/javascript">
-	//Empty value in the apple, orange or banana field to be taken as 0.
-		function applesValidate(){
-			apple = document.getElementById("apples");
-			for (i=0;i<apple.value.length;i++){
-				if(apple.value[i].match(/[0-9]/i) == null){
-					alert("INVALID INPUT! Number of apples has to be a non negative integer.");
-					//Timeout set to adapt to browsers which initialize asynchronous execution //of javascript such as firefox or safari.
-					window.setTimeout(function (){
-						apple.focus();
-						apple.select();
-					}, 0);
-					return false;
-				}
-			}
-			return true;
-		}
-		function orangesValidate(){
-			orange = document.getElementById("oranges");
-			for (i=0;i<orange.value.length;i++){
-				if(orange.value[i].match(/[0-9]/i) == null){
-					alert("INVALID INPUT! Number of apples has to be a non negative integer.");
-					//Timeout set to adapt to browsers which initialize asynchronous execution //of javascript such as firefox or safari.
-					window.setTimeout(function (){
-				        orange.focus();
-				        orange.select();
-				    }, 0);
-					return false;
-				}
-			}
-			return true;
-		}
-		function bananasValidate(){
-			banana = document.getElementById("bananas");
-			for (i=0;i<banana.value.length;i++){
-				if(banana.value[i].match(/[0-9]/i) == null){
-					alert("INVALID INPUT! Number of apples has to be a non negative integer.");
-					//Timeout set to adapt to browsers which initialize asynchronous execution //of javascript such as firefox or safari.
-					window.setTimeout(function (){
-						banana.focus();
-						banana.select();
-					},0);
-					return false;
-				}
-			}
-			return true;
-		}
-		function setTotal(){
-			apple = document.getElementById("apples");
-			orange = document.getElementById("oranges");
-			banana = document.getElementById("bananas");
-			apple_value = apple.value;
-			orange_value = orange.value;
-			banana_value = banana.value;
-			
+    <script type="text/javascript">
+        //Empty value in the apple, orange or banana field to be taken as 0.
+        function applesValidate() {
+            /**
+            	Determines whether apple input is valid
+            	return type: boolean
+            **/
+            apple = document.getElementById("apples");
+            for (i = 0; i < apple.value.length; i++) {
+                if (apple.value[i].match(/[0-9]/i) == null) {
+                    alert("INVALID INPUT! Number of apples has to be a non negative integer.");
+                    //Timeout set to adapt to browsers which initialize asynchronous execution //of javascript such as firefox or safari.
+                    window.setTimeout(function () {
+                        apple.focus();
+                        apple.select();
+                        apple.select();
+                    }, 0);
+                    return false;
+                }
+            }
+            return true;
+        }
 
-			if (apple.value == '') apple_value = '0';
-			if (orange.value == '') orange_value = '0';
-			if (banana.value == '') banana_value = '0';
+        function orangesValidate() {
+            /**
+            	Determines whether orange input is valid
+            	return type: boolean
+            **/
+            orange = document.getElementById("oranges");
+            for (i = 0; i < orange.value.length; i++) {
+                if (orange.value[i].match(/[0-9]/i) == null) {
+                    alert("INVALID INPUT! Number of apples has to be a non negative integer.");
+                    //Timeout set to adapt to browsers which initialize asynchronous execution //of javascript such as firefox or safari.
+                    window.setTimeout(function () {
+                        orange.focus();
+                        orange.select();
+                    }, 0);
+                    return false;
+                }
+            }
+            return true;
+        }
 
-			total = document.getElementById("total");
-			var tot = (parseFloat(apple_value) * 69.0 + parseFloat(orange_value) * 59.0 + parseFloat(banana_value) * 39.0)/100.0;
-			total.value = "$ " + parseFloat(tot);
-		}
-		function nameValidate(){
-			nameDoc = document.getElementById("name");
-			//console.log("INSIDE NAME");
-			//console.log(nameDoc.value);
-			if (nameDoc.value === undefined){
-				alert("Please enter your name.");
-				return false;
-			}
-			return true;
-		}
-		
-		function checkForm(){
+        function bananasValidate() {
+            /**
+            	Determines whether banana input is valid
+            	return type: boolean
+            **/
+            banana = document.getElementById("bananas");
+            for (i = 0; i < banana.value.length; i++) {
+                if (banana.value[i].match(/[0-9]/i) == null) {
+                    alert("INVALID INPUT! Number of apples has to be a non negative integer.");
+                    //Timeout set to adapt to browsers which initialize asynchronous execution //of javascript such as firefox or safari.
+                    window.setTimeout(function () {
+                        banana.focus();
+                        banana.select();
+                    }, 0);
+                    return false;
+                }
+            }
+            return true;
+        }
 
-			//console.log("IN CHECK FORM");
-			//console.log("CHECK FRUITS");
-			
-			valid = nameValidate() && applesValidate() && orangesValidate() && bananasValidate();
+        function setTotal() {
+            /**
+            	Sets the total value according to quantity and costs.
+            	return type: none
+            **/
+            apple = document.getElementById("apples");
+            orange = document.getElementById("oranges");
+            banana = document.getElementById("bananas");
+            apple_value = apple.value;
+            orange_value = orange.value;
+            banana_value = banana.value;
 
-			//console.log(valid);
 
-			return valid;
-		}
-	</script>
+            if (apple.value == '') apple_value = '0';
+            if (orange.value == '') orange_value = '0';
+            if (banana.value == '') banana_value = '0';
 
-	<h2>CZ3006 Online Fruit Shop</h2>
+            total = document.getElementById("total");
+            var tot = (parseFloat(apple_value) * 69.0 + parseFloat(orange_value) * 59.0 + parseFloat(banana_value) * 39.0) / 100.0;
+            total.value = "$ " + parseFloat(tot);
+        }
 
-	<form name="MainForm" method="post" action="/receipt.php" onsubmit="return checkForm();">
+        function nameValidate() {
+            /**
+            	Validates the name field
+            	return type: boolean
+            **/
+            nameDoc = document.getElementById("name");
+            //console.log("INSIDE NAME");
+            //console.log(nameDoc.value);
+            if (nameDoc.value == "") {
+                //console.log("INSIDE VALUE CHECK");
+                alert("Please enter your name.");
+                return false;
+            }
+            return true;
+        }
 
-		<table border="border" align="left">
-			<tr><th>Name:</th>
-			<th>
-				<input type="textbox" name="name" id="name" placeholder="eg: Mark Zuckerberg">
-				</input>
-			</th>
-			</tr>
-			<tr>
-				<th>Apples (69 cents/apple):&nbsp; </th>
-				<th><input type="textbox" name="apples" id="apples" placeholder="eg: 2" onchange="applesValidate(); setTotal();">
-				</input></th>
-			</tr>
-			<tr>
-				<th>Oranges (59 cents/orange):&nbsp; </th>
-				<th><input type="textbox" name="oranges" id="oranges" placeholder="eg: 2" onchange="orangesValidate(); setTotal();">
-				</input></th>
-			</tr>
-			<tr>
-				<th>Bananas (39 cents/banana):&nbsp; </th>
-				<th><input type="textbox" name="bananas" id="bananas" placeholder="eg: 2" onchange="bananasValidate(); setTotal();">
-				</input></th>
-			</tr>
-			<tr>
-				<th><b>Total cost:</b></th>
-				<th><input type="textbox" name="total" id="total" placeholder="0" onfocus="blurfield();">
-				</input></th>
-			</tr>
-			<tr>
-				<th>Payment Methods:</th>
-				<th><p>
-					<input type="radio" name="pmt" id="pmt" value="Visa" checked/>
-					Visa
-				</p>
-				<p>
-					<input type="radio" name="pmt" id="pmt" value="MasterCard"/>
-					MasterCard
-				</p>
-				<p>
-					<input type="radio" name="pmt" id="pmt" value="Discover"/>
-					Discover
-				</p></th>
-			</tr>
-			<tr>
-			<th><input type="submit" value="Submit">
-			</input></th>
-			<th>
-			<input type="reset">
-			</input></th>
-			</tr>
-	</form>
+        function checkForm() {
 
-	<script type="text/javascript">
-		function blurfield(){
-			var tot = document.getElementById("total");
-			tot.blur();
-		}
-	</script>
+            /**
+            	Checks the final form for errors
+            	return type: boolean
+            **/
+
+            //console.log("IN CHECK FORM");
+            //console.log("CHECK FRUITS");
+
+            valid = nameValidate() && applesValidate() && orangesValidate() && bananasValidate();
+
+            console.log(valid);
+
+            return valid;
+        }
+    </script>
+
+    <h2>CZ3006 Online Fruit Shop</h2>
+
+
+    <!-- Main Form -->
+    <form name="MainForm" method="post" action="/receipt.php" onsubmit="return checkForm();">
+
+        <table border="border" align="left">
+            <tr>
+                <th>Name:</th>
+                <th>
+                    <input type="textbox" name="name" id="name" placeholder="eg: Mark Zuckerberg" />
+                </th>
+            </tr>
+            <tr>
+                <th>Apples (69 cents/apple):&nbsp; </th>
+                <th>
+                    <input type="textbox" name="apples" id="apples" placeholder="eg: 2" onchange="applesValidate(); setTotal();" />
+                </th>
+            </tr>
+            <tr>
+                <th>Oranges (59 cents/orange):&nbsp; </th>
+                <th>
+                    <input type="textbox" name="oranges" id="oranges" placeholder="eg: 2" onchange="orangesValidate(); setTotal();" />
+                </th>
+            </tr>
+            <tr>
+                <th>Bananas (39 cents/banana):&nbsp; </th>
+                <th>
+                    <input type="textbox" name="bananas" id="bananas" placeholder="eg: 2" onchange="bananasValidate(); setTotal();" />
+                </th>
+            </tr>
+            <tr>
+                <th><b>Total cost:</b></th>
+                <th>
+                    <input type="textbox" name="total" id="total" placeholder="0" onfocus="blurfield();" />
+                </th>
+            </tr>
+            <tr>
+                <th>Payment Methods:</th>
+                <th>
+                    <p>
+                        <input type="radio" name="pmt" id="pmt" value="Visa" checked/> Visa
+                    </p>
+                    <p>
+                        <input type="radio" name="pmt" id="pmt" value="MasterCard" /> MasterCard
+                    </p>
+                    <p>
+                        <input type="radio" name="pmt" id="pmt" value="Discover" /> Discover
+                    </p>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    <input type="submit" value="Submit" />
+                </th>
+                <th>
+                    <input type="reset" />
+                </th>
+            </tr>
+        </table>
+    </form>
+
+    <script type="text/javascript">
+        function blurfield() {
+            /**
+            	Blurs the total field on focus
+            	return type: none
+            **/
+            var tot = document.getElementById("total");
+            tot.blur();
+        }
+    </script>
 </body>
+
 </html>
