@@ -7,11 +7,17 @@
 
 <body>
 	<script type="text/javascript">
+	//Empty value in the apple, orange or banana field to be taken as 0.
 		function applesValidate(){
 			apple = document.getElementById("apples");
 			for (i=0;i<apple.value.length;i++){
 				if(apple.value[i].match(/[0-9]/i) == null){
-					alert("INVALID INPUT!");
+					alert("INVALID INPUT! Number of apples has to be a non negative integer.");
+					//Timeout set to adapt to browsers which initialize asynchronous execution //of javascript such as firefox or safari.
+					window.setTimeout(function (){
+						apple.focus();
+						apple.select();
+					}, 0);
 					return false;
 				}
 			}
@@ -21,7 +27,12 @@
 			orange = document.getElementById("oranges");
 			for (i=0;i<orange.value.length;i++){
 				if(orange.value[i].match(/[0-9]/i) == null){
-					alert("INVALID INPUT!");
+					alert("INVALID INPUT! Number of apples has to be a non negative integer.");
+					//Timeout set to adapt to browsers which initialize asynchronous execution //of javascript such as firefox or safari.
+					window.setTimeout(function (){
+				        orange.focus();
+				        orange.select();
+				    }, 0);
 					return false;
 				}
 			}
@@ -31,7 +42,12 @@
 			banana = document.getElementById("bananas");
 			for (i=0;i<banana.value.length;i++){
 				if(banana.value[i].match(/[0-9]/i) == null){
-					alert("INVALID INPUT!");
+					alert("INVALID INPUT! Number of apples has to be a non negative integer.");
+					//Timeout set to adapt to browsers which initialize asynchronous execution //of javascript such as firefox or safari.
+					window.setTimeout(function (){
+						banana.focus();
+						banana.select();
+					},0);
 					return false;
 				}
 			}
@@ -55,65 +71,82 @@
 			total.value = "$ " + parseFloat(tot);
 		}
 		function nameValidate(){
-			name = document.getElementById("name");
-			if (name.value === ""){
+			nameDoc = document.getElementById("name");
+			//console.log("INSIDE NAME");
+			//console.log(nameDoc.value);
+			if (nameDoc.value === undefined){
 				alert("Please enter your name.");
 				return false;
 			}
 			return true;
 		}
-		function paymentValidate(){
-			pmt = document.getElementById("pmt");
-			if (pmt.value === ""){
-				alert("Please choose your payment method.");
-				return false;
-			}
-			return true;
-		}
+		
 		function checkForm(){
-			return nameValidate() && paymentValidate() && applesValidate() && orangesValidate() && bananasValidate();
+
+			//console.log("IN CHECK FORM");
+			//console.log("CHECK FRUITS");
+			
+			valid = nameValidate() && applesValidate() && orangesValidate() && bananasValidate();
+
+			//console.log(valid);
+
+			return valid;
 		}
 	</script>
 
+	<h2>CZ3006 Online Fruit Shop</h2>
+
 	<form name="MainForm" method="post" action="/receipt.php" onsubmit="return checkForm();">
-		<p>Name:
-		<input type="textbox" name="name" id="name" placeholder="eg: Mark Zuckerberg">
-		</input>
-		</p>
-		<p>Apples (69 cents/apple):
-		<input type="textbox" name="apples" id="apples" placeholder="eg: 2" onchange="applesValidate(); setTotal();">
-		</input>
-		</p>
-		<p>Oranges (59 cents/orange):
-		<input type="textbox" name="oranges" id="oranges" placeholder="eg: 2" onchange="orangesValidate(); setTotal();">
-		</input>
-		</p>		
-		<p>Bananas (39 cents/banana):
-		<input type="textbox" name="bananas" id="bananas" placeholder="eg: 2" onchange="bananasValidate(); setTotal();">
-		</input>
-		</p>
-		<p>Total cost:
-		<input type="textbox" name="total" id="total" placeholder="0" onfocus="blurfield();">
-		</input>
-		</p>
-		<p>Payment Methods:
-			<p>
-				<input type="radio" name="pmt" id="pmt" value="Visa"/>
-				Visa
-			</p>
-			<p>
-				<input type="radio" name="pmt" id="pmt" value="MasterCard"/>
-				MasterCard
-			</p>
-			<p>
-				<input type="radio" name="pmt" id="pmt" value="Discover"/>
-				Discover
-			</p>
-		</p>
-		<input type="submit" value="Submit">
-		</input>
-		<input type="reset">
-		</input>
+
+		<table border="border" align="left">
+			<tr><th>Name:</th>
+			<th>
+				<input type="textbox" name="name" id="name" placeholder="eg: Mark Zuckerberg">
+				</input>
+			</th>
+			</tr>
+			<tr>
+				<th>Apples (69 cents/apple):&nbsp; </th>
+				<th><input type="textbox" name="apples" id="apples" placeholder="eg: 2" onchange="applesValidate(); setTotal();">
+				</input></th>
+			</tr>
+			<tr>
+				<th>Oranges (59 cents/orange):&nbsp; </th>
+				<th><input type="textbox" name="oranges" id="oranges" placeholder="eg: 2" onchange="orangesValidate(); setTotal();">
+				</input></th>
+			</tr>
+			<tr>
+				<th>Bananas (39 cents/banana):&nbsp; </th>
+				<th><input type="textbox" name="bananas" id="bananas" placeholder="eg: 2" onchange="bananasValidate(); setTotal();">
+				</input></th>
+			</tr>
+			<tr>
+				<th><b>Total cost:</b></th>
+				<th><input type="textbox" name="total" id="total" placeholder="0" onfocus="blurfield();">
+				</input></th>
+			</tr>
+			<tr>
+				<th>Payment Methods:</th>
+				<th><p>
+					<input type="radio" name="pmt" id="pmt" value="Visa" checked/>
+					Visa
+				</p>
+				<p>
+					<input type="radio" name="pmt" id="pmt" value="MasterCard"/>
+					MasterCard
+				</p>
+				<p>
+					<input type="radio" name="pmt" id="pmt" value="Discover"/>
+					Discover
+				</p></th>
+			</tr>
+			<tr>
+			<th><input type="submit" value="Submit">
+			</input></th>
+			<th>
+			<input type="reset">
+			</input></th>
+			</tr>
 	</form>
 
 	<script type="text/javascript">
