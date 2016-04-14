@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="">
 <head>
-	<title>Receipt</title>
+	<title>Receipt for CZ3006 Online Fruit Shop</title>
 </head>
 <body>
 	<?php
@@ -19,7 +19,8 @@
 
 		$total = ($apple * 69 +$orange *59 + $banana * 39)/100;
 
-		$filename = '/home/nikhil/Documents/order.txt';
+		//Change according to the computer specs
+		$filename = '/home/nikhil/Documents/Web Projects/Simple-WebApp/order.txt';
 		$file = fopen($filename, 'c+');
 
 		$file_contents = file_get_contents($filename);
@@ -54,15 +55,16 @@
 		fclose($file);
 	?>
 
-	<table>
-		<caption><b>Receipt for 
-			<?php
-			print $name;
-			?>Paid using 
-			<?php print $pmt; ?>
+	<table border="border">
+		<caption>
+			<b>
+				<p>Receipt for <?php print $name; ?></p>
+				<p>Paid using <?php print $pmt; ?></p>
 			</b>
 		</caption>
+		<br>
 		<tr>
+			<th></th>
 			<th>Quantity</th>
 			<th>Cost</th>
 		</tr>
@@ -74,12 +76,12 @@
 		<tr>
 			<th>Oranges</th>
 			<td><?php print ("$orange"); ?></td>
-			<td><?php print (($orange * 69.0)/100.0); ?></td>
+			<td><?php print (($orange * 59.0)/100.0); ?></td>
 		</tr>
 		<tr>
 			<th>Bananas</th>
 			<td><?php print ("$banana"); ?></td>
-			<td><?php print (($banana * 69.0)/100.0); ?></td>
+			<td><?php print (($banana * 39.0)/100.0); ?></td>
 		</tr>
 		<tr>
 			<th colspan=2>Total</th>
